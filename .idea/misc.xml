@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mmaks/AndroidStudioProjects/HomeWork1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1215" />
+        <entry key="..\:/Users/mmaks/AndroidStudioProjects/HomeWork1/app/src/main/res/drawable/tv_background.xml" value="0.12" />
         <entry key="..\:/Users/mmaks/AndroidStudioProjects/HomeWork1/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/mmaks/AndroidStudioProjects/HomeWork1/app/src/main/res/layout/fragment_plate.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/mmaks/AndroidStudioProjects/HomeWork1/app/src/main/res/layout/button_layout.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/mmaks/AndroidStudioProjects/HomeWork1/app/src/main/res/layout/fragment_plate.xml" value="0.176" />
         <entry key="..\:/Users/mmaks/AndroidStudioProjects/HomeWork1/app/src/main/res/layout/rv_item.xml" value="0.23822463768115942" />
       </map>
     </option>
