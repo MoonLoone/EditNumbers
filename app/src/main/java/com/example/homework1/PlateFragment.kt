@@ -39,4 +39,5 @@ class PlateFragment : Fragment() {
         super.onSaveInstanceState(outState)
         outState.putInt(Constants.GET_INFO_FROM_INSTANCE, listSize)
     }
+
 }
