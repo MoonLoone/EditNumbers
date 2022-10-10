@@ -1,14 +1,15 @@
-package adapters
+package com.example.homework1.adapters
 
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homework1.databinding.RvItemBinding
 
-class RVPlateAdapter(intArray: IntArray?) : RecyclerView.Adapter<RVPlateAdapter.RVViewHolder>() {
+class RVPlateAdapter(listSize: Int) : RecyclerView.Adapter<RVPlateAdapter.RVViewHolder>() {
 
-    val listOfNumbers = intArray?.toMutableList() ?: mutableListOf()
+    private val listOfNumbers = MutableList(listSize){it}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RVViewHolder(
         RvItemBinding.inflate(
@@ -21,23 +22,19 @@ class RVPlateAdapter(intArray: IntArray?) : RecyclerView.Adapter<RVPlateAdapter.
 
     override fun onBindViewHolder(holder: RVViewHolder, position: Int) {
         with(holder) {
-            with(binding) {
-                with(tvItem) {
-                    if (position.mod(2) == 1) {
-                        setBackgroundColor(Color.RED)
-                    } else {
-                        setBackgroundColor(Color.BLUE)
-                    }
-                    maxLines = 1
-                    text = position.toString()
-                }
+            if (position.mod(2) == 1) {
+                binding.tvItem.setBackgroundColor(Color.RED)
+            } else {
+                binding.tvItem.setBackgroundColor(Color.BLUE)
             }
+            binding.tvItem.maxLines = 1
+            binding.tvItem.text = position.toString()
         }
     }
 
     override fun getItemCount() = listOfNumbers.size
 
-    inner class RVViewHolder(val binding: RvItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class RVViewHolder(val binding: RvItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     fun addPlate() {
         if (listOfNumbers.isEmpty()) listOfNumbers.add(1)
