@@ -12,7 +12,7 @@ import com.example.homework1.databinding.FragmentPlateBinding
 
 class PlateFragment : Fragment() {
 
-    var listSize = 0
+    private var listSize = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,14 +22,30 @@ class PlateFragment : Fragment() {
         val spanCount: Int =
             if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) 3
             else 4
+        listSize = savedInstanceState?.getInt(GET_INFO_FROM_INSTANCE)?:0
         val binding = FragmentPlateBinding.inflate(inflater, container, false)
-        val adapter = RVPlateAdapter(listSize)
+        val adapter = RVPlateAdapter()
+        adapter.submitList(MutableList(listSize){it})
         binding.rvPlates.adapter = adapter
         binding.rvPlates.layoutManager = GridLayoutManager(context, spanCount)
         binding.button.setOnClickListener {
-            adapter.addPlate()
+            if (adapter.currentList.isEmpty()){
+                adapter.submitList(MutableList(1){it})
+            }
+            else{
+                adapter.submitList(MutableList(adapter.currentList.size+1){it})
+            }
             listSize++
         }
         return binding.root
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(GET_INFO_FROM_INSTANCE, listSize)
+    }
+
+    companion object{
+        const val GET_INFO_FROM_INSTANCE = "get data from instance"
     }
 }

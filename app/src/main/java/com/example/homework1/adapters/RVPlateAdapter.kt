@@ -6,13 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.homework1.databinding.RvItemBinding
+import com.example.homework1.databinding.RecycleViewItemBinding
 
-class RVPlateAdapter(listSize: Int) :
+class RVPlateAdapter :
     ListAdapter<Int, RVPlateAdapter.RVViewHolder>(DiffCallBack()) {
-    init {
-        submitList(MutableList(listSize){it})
-    }
 
     class DiffCallBack : DiffUtil.ItemCallback<Int>() {
         override fun areItemsTheSame(oldItem: Int, newItem: Int) = (oldItem == newItem)
@@ -20,20 +17,12 @@ class RVPlateAdapter(listSize: Int) :
             areItemsTheSame(oldItem, newItem)
     }
 
-    class RVViewHolder(val binding: RvItemBinding) : RecyclerView.ViewHolder(binding.root)
-
-    fun addPlate() {
-        if (currentList.isEmpty()){
-            submitList(MutableList(1){it})
-        }
-        else{
-            submitList(MutableList(currentList.size+1){it})
-        }
-        notifyItemInserted(currentList.size)
+    class RVViewHolder(val binding: RecycleViewItemBinding) : RecyclerView.ViewHolder(binding.root){
+        val color = listOf<Int>(Color.RED, Color.BLUE)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RVViewHolder(
-        RvItemBinding.inflate(
+        RecycleViewItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -42,12 +31,7 @@ class RVPlateAdapter(listSize: Int) :
 
     override fun onBindViewHolder(holder: RVViewHolder, position: Int) {
         with(holder) {
-            if (position.mod(2) == 1) {
-                binding.tvItem.setBackgroundColor(Color.RED)
-            } else {
-                binding.tvItem.setBackgroundColor(Color.BLUE)
-            }
-            binding.tvItem.maxLines = 1
+            binding.tvItem.setBackgroundColor(color[position.mod(2)])
             binding.tvItem.text = position.toString()
         }
     }
