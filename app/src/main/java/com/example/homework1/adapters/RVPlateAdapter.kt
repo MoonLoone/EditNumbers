@@ -17,8 +17,14 @@ class RVPlateAdapter :
             areItemsTheSame(oldItem, newItem)
     }
 
-    class RVViewHolder(val binding: RecycleViewItemBinding) : RecyclerView.ViewHolder(binding.root){
-        val color = listOf<Int>(Color.RED, Color.BLUE)
+    class RVViewHolder(val binding: RecycleViewItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(position: Int) {
+            binding.tvItem.setBackgroundColor(
+                if (position.mod(2) == 1) Color.RED else Color.BLUE
+            )
+            binding.tvItem.text = position.toString()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RVViewHolder(
@@ -30,10 +36,7 @@ class RVPlateAdapter :
     )
 
     override fun onBindViewHolder(holder: RVViewHolder, position: Int) {
-        with(holder) {
-            binding.tvItem.setBackgroundColor(color[position.mod(2)])
-            binding.tvItem.text = position.toString()
-        }
+        holder.bind(position)
     }
 
 }

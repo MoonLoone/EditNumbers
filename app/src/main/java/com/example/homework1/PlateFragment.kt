@@ -30,10 +30,10 @@ class PlateFragment : Fragment() {
         binding.rvPlates.layoutManager = GridLayoutManager(context, spanCount)
         binding.button.setOnClickListener {
             if (adapter.currentList.isEmpty()){
-                adapter.submitList(MutableList(1){it})
+                adapter.submitList(listOf(1))
             }
             else{
-                adapter.submitList(MutableList(adapter.currentList.size+1){it})
+                adapter.submitList(List(listSize){it})
             }
             listSize++
         }
