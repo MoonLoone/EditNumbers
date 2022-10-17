@@ -29,13 +29,8 @@ class PlateFragment : Fragment() {
         binding.rvPlates.adapter = adapter
         binding.rvPlates.layoutManager = GridLayoutManager(context, spanCount)
         binding.button.setOnClickListener {
-            if (adapter.currentList.isEmpty()){
-                adapter.submitList(listOf(1))
-            }
-            else{
-                adapter.submitList(List(listSize){it})
-            }
             listSize++
+            adapter.submitList(List(listSize){it})
         }
         return binding.root
     }
